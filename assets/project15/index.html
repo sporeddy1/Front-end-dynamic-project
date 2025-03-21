@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    
+    <title>Age Calculator</title>
+    
+    <script>
+        
+        class AgeCalculator {
+            constructor(birthDate) {
+                this.birthDate = new Date(birthDate);
+            }
+
+            
+            calculateAge() {
+                const today = new Date();
+                let age = today.getFullYear() - this.birthDate.getFullYear();
+                const monthDifference = today.getMonth() - this.birthDate.getMonth();
+
+                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < this.birthDate.getDate())) {
+                    age--;
+                }
+
+                return age;
+            }
+        }
+
+        
+        function updateAge() {
+            const dob = document.getElementById('dob').value;
+            
+            if (dob) {
+                const person = new AgeCalculator(dob);
+                const age = person.calculateAge();
+                document.getElementById('result').innerHTML = `You are ${age} years old.`;
+            } else {
+                document.getElementById('result').innerHTML = "Please enter a valid date of birth.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Age Calculator</h2>
+    
+    
+    
+    <input type="date" id="dob" onchange="updateAge()">
+
+    <br><br>
+
+    
+    <p id="result"></p>
+</body>
+</html>

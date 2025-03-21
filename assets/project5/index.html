@@ -1,0 +1,16 @@
+<DOCTYPE html>
+    <html>
+    <head>
+        <script>
+            function convertToUpperCase() {
+                let inputText = document.getElementById("inputField").value;
+                document.getElementById("outputField").value = inputText.toUpperCase();
+            }
+        </script>
+    </head>
+    <body>
+        <input id="inputField" oninput="convertToUpperCase()" placeholder="input text">
+        <input  id="outputField" readonly placeholder="output text">
+    </body>
+    </html>
+    

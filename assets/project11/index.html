@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html >
+<head>
+    
+    
+    <title>Student Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+       
+        .insert-info {
+            background-color: #28a745; /* Green */
+        }
+        .show-info {
+            background-color: #007bff; /* Blue */
+        }
+        .clear-inputs {
+            background-color: #fd7e14; /* Orange */
+        }
+        .clear-display {
+            background-color: #dc3545; /* Red */
+        }
+        h4 {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <input type="text" id="name" placeholder="Name">
+    <input type="number" id="age" placeholder="Age">
+    <input type="date" id="dob">
+    <br>
+    <button class="insert-info" onclick="insert()">Insert Info</button>
+    <button class="show-info" onclick="display()">Show Info</button>
+    <button class="clear-inputs" onclick="clearInputs()">Clear Inputs</button>
+    <button class="clear-display" onclick="clearDisplay()">Clear Display</button>
+
+    <h4>Results: </h4>
+
+    
+    <input type="text" id="search" placeholder="Search by Name or Age" oninput="search()">
+    
+    <p id="demo_div"></p>
+    <p id="error_message" class="error"></p>
+
+    <script>
+        
+        function Student(name, age, dob) {
+            this.name = name;
+            this.age = age;
+            this.dob = dob;
+            this.main = function() {
+                return "Name: " + this.name + " Age: " + this.age + " DOB: " + this.dob;
+            };
+        }
+
+        let students = [];
+
+        
+        function insert() {
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const dob = document.getElementById("dob").value;
+
+            
+            if (!name || !age || !dob) {
+                document.getElementById("error_message").textContent = "Please fill in all fields.";
+                return;
+            }
+
+            
+            document.getElementById("error_message").textContent = "";
+
+            
+            let student = new Student(name, age, dob);
+
+            
+            students.push(student);
+
+            alert("Student added successfully");
+
+            
+            clearInputs();
+        }
+
+        
+        function display(filteredStudents = students) {
+            if (filteredStudents.length === 0) {
+                document.getElementById("demo_div").innerHTML = "No students to display.";
+                return;
+            }
+
+            let output = "";
+            for (let i = 0; i < filteredStudents.length; i++) {
+                output += filteredStudents[i].main() + "<br>";
+            }
+            document.getElementById("demo_div").innerHTML = output;
+        }
+
+        
+        function clearInputs() {
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("dob").value = "";
+        }
+
+        
+        function clearDisplay() {
+            document.getElementById("demo_div").innerHTML = "";
+        }
+
+        
+        function search() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+
+            
+            const filteredStudents = students.filter(student => {
+                const nameMatches = student.name.toLowerCase().includes(searchTerm);
+                const ageMatches = student.age.toString().includes(searchTerm); 
+                return nameMatches || ageMatches; 
+            });
+
+           
+            display(filteredStudents);
+        }
+    </script>
+
+</body>
+</html>

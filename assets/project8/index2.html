@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <input id="input_a" placeholder="enter A"/>
+        <input id="input_b" placeholder="enter B" />
+        <button onclick="calculate()">submit</button>
+        <div id="output_span"></div>
+        <script>
+            const colors=["blue","orange"];
+            let idx=0;
+            function calculate(){
+                let a = parseInt(document.getElementById("input_a").value);
+                let b = parseInt(document.getElementById("input_b").value);
+                let sum = 0;
+               /* for (let i = a; i <= b; i++) {
+                    sum += i;
+                } */
+              /*  let i=a;
+                while(i<=b){
+                    sum+=i;
+                    i++;
+
+                } */
+                let i = a;
+          
+                do {
+                    sum += i;
+                    i++;
+                } while (i <= b);
+
+                document.getElementById("output_span").innerHTML = "The sum is:" +sum;
+                document.getElementById("output_span").style="color: "+colors[idx];
+            }
+        </script>
+    </body>
+</html>

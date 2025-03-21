@@ -1,0 +1,25 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h1>Student Information</h1>
+        
+        <div id="studentInfo"></div> 
+
+        <script>
+            const student = {
+                name: "sai",
+                id: "4",
+                grade: "10",
+                
+                good: function() {
+                    return "my name is: " + this.name + ", student id: " + this.id + ", grade: " + this.grade;
+                }
+            };
+
+            
+            document.getElementById("studentInfo").innerHTML = student.good();
+        </script>
+    </body>
+</html>
